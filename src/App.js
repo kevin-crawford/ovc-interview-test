@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Table from './components/Table';
+
+import {Provider} from 'react-redux';
+import store from './redux/store';
+
 
 function App() {
+  // headings are static, array of headings are provided to the component through headings prop
+  const headings = [
+    'Name',
+    'Email',
+    'City',
+    'Company'
+  ]
+  // provider gives us our redux store, data and UI
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Table headings={headings}/>
+    </Provider>
   );
 }
 
