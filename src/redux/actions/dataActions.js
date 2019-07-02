@@ -1,5 +1,6 @@
 import { SET_DATA, LOADING_DATA, SET_ERRORS, CLEAR_ERRORS, LOADING_UI} from '../types';
 
+
 export const getData = () => dispatch => {
 	fetch('https://jsonplaceholder.typicode.com/users')
 		.then(res => res.json())

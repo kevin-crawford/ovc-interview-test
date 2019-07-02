@@ -5,6 +5,7 @@ import Cell from './Cell';
 import getData from '../redux/actions/dataActions';
 
 
+
 export class Table extends Component {
 
 	componentDidMount() {
@@ -25,18 +26,11 @@ export class Table extends Component {
 		)
 	}
 
-	// renderRow = (_row, rowIndex) => {
-		
-	// 	return (
-	// 		<tr key={`row-${rowIndex}`}>
-	// 			{}
-	// 		</tr>
-	// 	)
-	// }
 
 	render() {
 
-		const { UI: { loading }, headings, rows } = this.props;
+		const { UI: {loading}, headings, user } = this.props;
+		console.log(user);
 
 		const theadMarkup = (
 			<tr key="heading">
@@ -44,10 +38,19 @@ export class Table extends Component {
 			</tr>
 		)
 
+		const tbodyMarkup = user.data.map((user, index) => (
+			<tr key={`row-${index}`}>
+				<td>{user.name}</td>
+				<td><a href={`mailto:${user.email}`}>{user.email}</a></td>
+				<td>{user.address.city}</td>
+				<td>{user.company.name}</td>
+			</tr>
+		))
+
 		return (
 			<table className="Table">
 				<thead>{theadMarkup}</thead>
-				<tbody>Body</tbody>
+				<tbody>{tbodyMarkup}</tbody>
 			</table>
 		)
 	}
@@ -59,4 +62,4 @@ const mapStateToProps = state => ({
 	UI: state.UI
 })
 
-export default connect(mapStateToProps, {getData})(Table)
+export default connect(mapStateToProps, { getData })(Table)
