@@ -12,7 +12,7 @@ export class Table extends Component {
     const { headings, user } = this.props;
 
     const theadMarkup = (
-      <tr key="heading">
+      <tr data-testid="heading" className="heading">
         {headings.map((heading, index) => (
           <Cell key={`heading-${index}`} content={heading} header={true} />
         ))}
@@ -20,20 +20,22 @@ export class Table extends Component {
     );
 
     const tbodyMarkup = user.data.map((user, index) => (
-      <tr key={`row-${index}`}>
-        <td>{user.name}</td>
+      <tr data-testid="row" key={`row-${index}`}>
+        <td data-testid="username">{user.name}</td>
         <td>
-          <a href={`mailto:${user.email}`}>{user.email}</a>
+          <a data-testid="email" href={`mailto:${user.email}`}>
+            {user.email}
+          </a>
         </td>
-        <td>{user.address.city}</td>
-        <td>{user.company.name}</td>
+        <td data-testid="city">{user.address.city}</td>
+        <td data-testid="company">{user.company.name}</td>
       </tr>
     ));
 
     return (
       <table className="Table">
         <thead>{theadMarkup}</thead>
-        <tbody>{tbodyMarkup}</tbody>
+        <tbody data-testid="body">{tbodyMarkup}</tbody>
       </table>
     );
   }
